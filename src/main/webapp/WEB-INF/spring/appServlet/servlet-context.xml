@@ -21,7 +21,10 @@
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
-
+		
+	<beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<beans:property name="basename" value="locale/messages" />
+	</beans:bean>
 
 	<beans:bean id="templateResolver"
 		class="org.thymeleaf.templateresolver.ServletContextTemplateResolver">

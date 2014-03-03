@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html layout:decorator="layouts/default">
+<head>
+<title>Task List</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<div layout:fragment="content">
+		<form action="#" th:object="${messageInfo}" th:action="@{/insert}"
+			method="post">
+
+			<h1>Get In Touch With Us ...</h1>
+
+
+			<fieldset id="user-details">
+
+				<label for="name" th:text="#{theader.name}">Name: </label> <input
+					type="text" name="name" value="" id="name" placeholder="Your Name"
+					required="required" autofocus="autofocus" th:value="*{name}" /> <label
+					for="email" th:text="#{theader.email}">Email: </label> <input
+					type="email" name="email" value="" id="email"
+					placeholder="mail@email.com" required="required"
+					th:value="*{email}" /> <label for="phone"
+					th:text="#{theader.phone}">Phone:</label> <input type="text"
+					name="phone" value="" th:value="*{phone}" /> <label for="website"
+					th:text="#{theader.website}">Website:</label> <input type="url"
+					name="website" value="" th:value="*{website}" />
+
+			</fieldset>
+			<!--end user-details-->
+
+			<fieldset id="user-message">
+
+				<label for="message" th:text="#{theader.message}">Your
+					Message: </label>
+				<textarea name="message" rows="0" cols="0" th:value="*{message}"></textarea>
+
+				<input type="submit" value="Submit Message" name="submit"
+					class="submit" />
+			</fieldset>
+			<!-- end user-message -->
+			<div id="errors" th:if="${#fields.hasErrors('*')}">
+				<ul>
+					<li th:each="err : ${#fields.errors('*')}" th:text="${err}">Input
+						is incorrect</li>
+				</ul>
+			</div>
+
+		</form>
+		
+		<div id="displaylist">
+		<table id="display-data">
+			<thead>
+				<tr>
+					<th th:text="#{theader.count}"></th>
+					<th th:text="#{theader.name}"></th>
+					<th th:text="#{theader.email}"></th>
+					<th th:text="#{theader.phone}"></th>
+					<th th:text="#{theader.website}"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="msg, rowStat : ${messages}">
+					<td th:text="${rowStat.count}">1</td>
+					<td th:text="${msg.name}">My Name</td>
+					<td th:text="${msg.email}">my@email.com</td>
+					<td th:text="${msg.phone}">9999</td>
+					<td th:text="${msg.website}">http://mysite.com</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+		
+	</div>
+
+	
+	
+</body>
+</html>
